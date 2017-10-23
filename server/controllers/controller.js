@@ -33,7 +33,7 @@ module.exports = {
     },
     showOne:(req,res)=>{
         Question.findOne({_id:req.params.id})
-            .populate('answers')
+            .populate({ path: 'answers', options: { sort: { 'likes': -1 } }})
             .exec((err, result) => {
                 if (err) return res.status(500).json("Document NOT FOUND")
                 res.json(result);
